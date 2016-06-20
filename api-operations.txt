@@ -1,0 +1,35 @@
+APIs: Suppose you want to build a calendar application that helps users ensure that meetings and events do not overlap and have sufficient time for travel between events.
+
+a. What API operations would you create and why?
+b. What would a request and response look like for each operation?
+
+In order to create a working calendar application we'll need to implement CRUD operations to our API so that we can create, read, update and delete events on our calendar. 
+
+/events POST
+First we will need an operation for adding new events to our calendar, this will be a POST request made to the /events URL.
+The request will contain all the data necessary to create an event (date, time, location, etc.) either in the request body or in an event parameter of the request. 
+The response will contain an error if there was one to report otherwise it will contain a status code indicating the success of the insertion. 
+Additionally, if the event overlaps with another in the database the insertion will not be permitted. 
+The response will contain this information and the user will be notified that the insertion didn't happen because there would have been an overlap.
+
+/events GET
+We will need an operation for displaying all the events we have in the calendar, this will be a GET request made to the /events URL. 
+The response will contain all the event objects in the database.
+
+/events/:eventId PUT
+We'll implement a PUT method at the /events/:eventId route to facilitate updating events that already exist on our calendar. 
+The request will contain the eventId URL parameter as well as all keys and their values we want to update on the calendar event. 
+The response will contain an error if there was one to report otherwise it will contain a status code indicating the success of the update. 
+Additionally, if the event overlaps with another in the database the update will not be permitted. 
+The response will contain this information and the user will be notified that the update didn't happen because there would have been an overlap.
+
+/events/:eventId GET
+In order to look at a single event on our calendar we will create a GET method at our /events/:eventId URL. 
+The request will have the URL parameter eventId which our server will use to fetch a specific event from the database. 
+The response will contain the event retrieved from the database. 
+
+/events/:eventId DELETE
+The last operation we need will be used to delete individual events from our calendar, this will be a DELETE method made to the /events/:eventId path. 
+The request will contain the URL paramater eventId which our server will use to find and remove a specific event from our calendar database. 
+The response will contain an error if there was one to report otherwise it will contain a status code indicating the success of the deletion.
+
